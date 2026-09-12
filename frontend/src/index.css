@@ -80,6 +80,43 @@ button, input, textarea, select { font-family: inherit; }
 *::-webkit-scrollbar-track { background: var(--surface); }
 *::-webkit-scrollbar-thumb { border-radius: 999px; background: var(--border); border: 2px solid var(--surface); }
 
+/* ---------- Accessibility: keyboard focus ---------- */
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  background: var(--violet);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  z-index: 200;
+  transition: top 200ms ease;
+}
+.skip-link:focus {
+  top: 12px;
+  outline: 3px solid var(--gold-hot);
+  outline-offset: 2px;
+}
+
+/* Visible focus ring for keyboard users on anything that doesn't
+   already define its own focus style (buttons, links, icon buttons). */
+:focus-visible {
+  outline: 3px solid var(--gold-hot);
+  outline-offset: 2px;
+}
+
+/* Inputs/textareas keep their existing focus treatment (border + glow)
+   instead of an outline on top of it. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

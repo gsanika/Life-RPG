@@ -1399,3 +1399,39 @@ label {
 .chart-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px; }
 
 .loading-screen { display: grid; place-items: center; height: 100vh; color: var(--text-muted); font-family: var(--font-display); font-size: 1.2rem; }
+
+
+
+/* ---------- Particle burst on quest completion ---------- */
+
+.quest-actions {
+  position: relative;
+}
+
+.particle-burst {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.particle-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+/* ---------- Full-screen reactions ---------- */
+
+.screen-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 300;
+}

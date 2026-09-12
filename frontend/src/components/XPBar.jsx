@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import AnimatedNumber from './AnimatedNumber.jsx';
 
 export default function XPBar({ xpIntoLevel, xpForNextLevel }) {
   const pct = xpForNextLevel > 0 ? Math.min(100, (xpIntoLevel / xpForNextLevel) * 100) : 100;
@@ -14,8 +15,8 @@ export default function XPBar({ xpIntoLevel, xpForNextLevel }) {
         />
       </div>
       <div className="xp-bar-caption">
-        <span>{xpIntoLevel} XP</span>
-        <span>{xpForNextLevel} XP to next level</span>
+        <span><AnimatedNumber value={xpIntoLevel} /> XP</span>
+        <span><AnimatedNumber value={xpForNextLevel} /> XP to next level</span>
       </div>
     </div>
   );

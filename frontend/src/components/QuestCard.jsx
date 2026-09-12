@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ParticleBurst from './ParticleBurst.jsx';
 
 const ATTRIBUTE_COLOR = {
   intellect: 'var(--violet)',
@@ -33,6 +35,16 @@ export default function QuestCard({ quest, onComplete, onDelete, completing }) {
   };
   const accent = ATTRIBUTE_COLOR[quest.attribute] || 'var(--violet)';
 
+  const prevDone = useRef(done);
+  const [showBurst, setShowBurst] = useState(false);
+
+  useEffect(() => {
+    if (!prevDone.current && done) {
+      setShowBurst(true);
+    }
+    prevDone.current = done;
+  }, [done]);
+
   return (
     <motion.div
       layout
@@ -63,13 +75,17 @@ export default function QuestCard({ quest, onComplete, onDelete, completing }) {
       </div>
 
       <div className="quest-actions">
-        <button
+        <AnimatePresence>
+          {showBurst && <ParticleBurst onComplete={() => setShowBurst(false)} />}
+        </AnimatePresence>
+        <motion.button
           className={`btn ${done ? '' : 'btn-primary'}`}
           disabled={done || completing}
           onClick={() => onComplete(quest._id)}
+          whileTap={{ scale: 0.88 }}
         >
           {done ? 'Done' : completing ? '…' : 'Complete'}
-        </button>
+        </motion.button>
         <button className="icon-btn" title="Retire quest" onClick={() => onDelete(quest._id)}>
           ✕
         </button>

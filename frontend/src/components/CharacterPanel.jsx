@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import XPBar from './XPBar.jsx';
+import AnimatedNumber from './AnimatedNumber.jsx';
+import PopOnChange from './PopOnChange.jsx';
 
 const ATTRIBUTES = [
   { key: 'intellect', icon: '🧠', color: 'var(--violet)' },
@@ -22,7 +24,7 @@ export default function CharacterPanel({ character }) {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 14 }}
       >
-        <span className="num">{character.level}</span>
+        <span className="num"><AnimatedNumber value={character.level} /></span>
         <span className="lbl">LEVEL</span>
       </motion.div>
 
@@ -41,7 +43,7 @@ export default function CharacterPanel({ character }) {
               <div className="attr-body">
                 <div className="attr-head">
                   <span className="attr-name" style={{ textTransform: 'capitalize' }}>{attr.key}</span>
-                  <span className="attr-val">{value}</span>
+                  <span className="attr-val"><AnimatedNumber value={value} /></span>
                 </div>
                 <div className="attr-track">
                   <motion.div
@@ -58,7 +60,9 @@ export default function CharacterPanel({ character }) {
         })}
       </div>
 
-      <div className="gold-line">🪙 {character.gold}</div>
+      <div className="gold-line">
+        🪙 <PopOnChange value={character.gold}><AnimatedNumber value={character.gold} /></PopOnChange>
+      </div>
     </div>
   );
 }
